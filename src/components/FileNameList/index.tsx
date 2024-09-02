@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { PlaygroundContext } from '../../PlaygroundContext';
+import { FileNameItem } from '../FileNameItem';
 
 export default function FileNameList() {
-  const { files, setSelectedFileName } = useContext(PlaygroundContext);
+  const { files, setSelectedFileName, selectedFileName } =
+    useContext(PlaygroundContext);
 
   const [tabs, setTabs] = useState(['']);
 
@@ -11,9 +13,14 @@ export default function FileNameList() {
   }, [files]);
 
   return (
-    <div>
-      {tabs.map((item) => (
-        <div onClick={() => setSelectedFileName(item)}>{item}</div>
+    <div className="flex items-center h-[2.375rem] verflow-x-auto overflow-y-hidden border-b border-[#ddd] text-[#444] bg-white box-border filenamelist-scrollbar">
+      {tabs.map((item, index) => (
+        <FileNameItem
+          key={item + index}
+          value={item}
+          actived={selectedFileName === item}
+          onClick={() => setSelectedFileName(item)}
+        ></FileNameItem>
       ))}
     </div>
   );
