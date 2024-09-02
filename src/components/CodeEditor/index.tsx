@@ -1,12 +1,11 @@
+import { useContext } from 'react';
 import Editor from '../Editor';
 import FileNameList from '../FileNameList';
+import { PlaygroundContext } from '../../PlaygroundContext';
 
 export default function CodeEditor() {
-  const file = {
-    name: 'decade.tsx',
-    value: 'import lodash from "lodash";\n\nconst a = <div>guang</div>',
-    language: 'typescript',
-  };
+  const { files, selectedFileName } = useContext(PlaygroundContext);
+  const file = files[selectedFileName];
 
   function onEditorChange() {
     // eslint-disable-next-line prefer-rest-params

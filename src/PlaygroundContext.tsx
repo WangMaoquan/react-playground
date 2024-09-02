@@ -1,6 +1,7 @@
 import { createContext, PropsWithChildren, useState } from 'react';
 import { EditorFile } from './components/Editor';
 import { fileName2Language } from './utils';
+import { initFiles } from './files';
 
 export interface Files {
   [key: string]: EditorFile;
@@ -33,7 +34,7 @@ export const PlaygroundContext = createContext<PlaygroundContext>({
 
 export const PlaygroundProvider = (props: PropsWithChildren) => {
   const { children } = props;
-  const [files, setFiles] = useState<Files>({});
+  const [files, setFiles] = useState<Files>(initFiles);
   const [selectedFileName, setSelectedFileName] = useState('App.tsx');
 
   const addFile = (name: string) => {
