@@ -50,6 +50,7 @@ export default function Editor(props: EditorProps) {
       path={props.file.name}
       language={props.file.language}
       onMount={handleEditorMount}
+      onChange={props.onChange}
       value={props.file.value}
       options={{
         fontSize: 14, // 字体大小

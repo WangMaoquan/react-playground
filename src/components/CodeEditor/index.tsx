@@ -4,12 +4,13 @@ import FileNameList from '../FileNameList';
 import { PlaygroundContext } from '../../PlaygroundContext';
 
 export default function CodeEditor() {
-  const { files, selectedFileName } = useContext(PlaygroundContext);
+  const { files, selectedFileName, setFiles } = useContext(PlaygroundContext);
   const file = files[selectedFileName];
 
-  function onEditorChange() {
-    // eslint-disable-next-line prefer-rest-params
-    console.log(...arguments);
+  function onEditorChange(value?: string) {
+    console.log(value);
+    files[file.name].value = value!;
+    setFiles({ ...files });
   }
 
   return (
