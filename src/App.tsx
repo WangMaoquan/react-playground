@@ -1,7 +1,12 @@
+import { PlaygroundProvider } from './PlaygroundContext';
 import { ReactPlayground } from './ReactPlayground';
 
 function App() {
-  return <ReactPlayground />;
+  return (
+    <PlaygroundProvider>
+      <ReactPlayground />
+    </PlaygroundProvider>
+  );
 }
 
 export default App;
