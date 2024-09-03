@@ -3,10 +3,15 @@ import { PlaygroundContext } from '../../PlaygroundContext';
 import { FileNameItem } from '../FileNameItem';
 
 export default function FileNameList() {
-  const { files, setSelectedFileName, selectedFileName } =
+  const { files, setSelectedFileName, selectedFileName, updateFileName } =
     useContext(PlaygroundContext);
 
   const [tabs, setTabs] = useState(['']);
+
+  const handleEditComplete = (name: string, prevName: string) => {
+    updateFileName(prevName, name);
+    setSelectedFileName(name);
+  };
 
   useEffect(() => {
     setTabs(Object.keys(files));
@@ -20,6 +25,7 @@ export default function FileNameList() {
           value={item}
           actived={selectedFileName === item}
           onClick={() => setSelectedFileName(item)}
+          onEditComplete={(name: string) => handleEditComplete(name, item)}
         ></FileNameItem>
       ))}
     </div>
