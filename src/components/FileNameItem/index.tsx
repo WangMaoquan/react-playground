@@ -1,20 +1,31 @@
-import React, { useRef, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 
 export interface FileNameItemProps {
   value: string;
   actived: boolean;
   onClick: () => void;
   onEditComplete: (filename: string) => void;
+  create: boolean;
+  onRemove: MouseEventHandler;
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
-  const { value, actived = false, onClick, onEditComplete } = props;
+  const {
+    value,
+    actived = false,
+    onClick,
+    onEditComplete,
+    create,
+    onRemove,
+  } = props;
 
   const [editing, setEditing] = useState(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [name, setName] = useState(value);
+
+  const [creating, setCreating] = useState(create);
 
   const handleDoubleClick = () => {
     setEditing(true);
@@ -27,7 +38,14 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
   const onBlur = () => {
     setEditing(false);
     onEditComplete(name);
+    setCreating(false);
   };
+
+  useEffect(() => {
+    if (creating) {
+      inputRef?.current?.focus();
+    }
+  }, [creating]);
 
   return (
     <div
@@ -45,7 +63,15 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
           onBlur={onBlur}
         />
       ) : (
-        <span onDoubleClick={handleDoubleClick}>{name}</span>
+        <>
+          <span onDoubleClick={handleDoubleClick}>{name}</span>
+          <span className="flex ml-[0.3125rem]" onClick={onRemove}>
+            <svg width="12" height="12" viewBox="0 0 24 24">
+              <line stroke="#999" x1="18" y1="6" x2="6" y2="18"></line>
+              <line stroke="#999" x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </span>
+        </>
       )}
     </div>
   );
