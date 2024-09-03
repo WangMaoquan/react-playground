@@ -52,7 +52,7 @@ export default function FileNameList() {
   };
 
   return (
-    <div className="flex flex-none flex-basis-9 items-center h-[2.375rem] verflow-x-auto overflow-y-hidden border-b border-[#ddd] text-[#444] bg-white box-border filenamelist-scrollbar sticky top-0">
+    <div className="flex flex-none flex-basis-9 items-center h-[2.375rem] verflow-x-auto overflow-y-hidden border-b border-[#ddd] text-[#444] bg-white box-border filenamelist-scrollbar sticky top-0 dark:bg-black">
       {tabs.map((item, index) => (
         <FileNameItem
           key={item + index}

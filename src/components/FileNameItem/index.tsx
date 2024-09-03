@@ -70,7 +70,9 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
         />
       ) : (
         <>
-          <span onDoubleClick={handleDoubleClick}>{name}</span>
+          <span onDoubleClick={handleDoubleClick} className="dark:text-white">
+            {name}
+          </span>
           {!readonly && (
             <Popconfirm
               title="确认删除该文件吗？"

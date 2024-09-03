@@ -1,12 +1,14 @@
 import logoSvg from '../../assets/react.svg';
+import { ThemeSwitch } from '../ThemeSwitch';
 
 export default function Header() {
   return (
-    <div className="h-[3.125rem] px-5 border-b border-black flex items-center justify-between box-border">
+    <div className="h-[3.125rem] px-5 border-b border-black flex items-center justify-between box-border dark:bg-black dark:text-white">
       <div className="flex items-center text-xl">
         <img alt="logo" src={logoSvg} className="h-6 mr-[0.625rem]" />
         <span>React Playground</span>
       </div>
+      <ThemeSwitch />
     </div>
   );
 }

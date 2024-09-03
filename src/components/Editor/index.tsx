@@ -21,7 +21,7 @@ interface EditorProps {
 }
 
 export default function Editor(props: EditorProps) {
-  const { selectedFileName, files } = useContext(PlaygroundContext);
+  const { selectedFileName, files, theme } = useContext(PlaygroundContext);
 
   const monaco = useMonaco();
 
@@ -70,6 +70,7 @@ export default function Editor(props: EditorProps) {
       onMount={handleEditorMount}
       onChange={props.onChange}
       value={props.file.value}
+      theme={theme === 'dark' ? 'vs-dark' : theme}
       options={{
         fontSize: 14, // 字体大小
         scrollBeyondLastLine: false, // 取消编辑器右侧的滚动条

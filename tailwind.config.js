@@ -20,4 +20,5 @@ export default {
       });
     }),
   ],
+  darkMode: 'class',
 };
