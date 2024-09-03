@@ -1,6 +1,7 @@
 import logoSvg from '../../assets/react.svg';
 import { ShareLink } from '../ShareLink';
 import { ThemeSwitch } from '../ThemeSwitch';
+import { DownloadCode } from '../DownloadCode';
 
 export default function Header() {
   return (
@@ -10,6 +11,7 @@ export default function Header() {
         <span>React Playground</span>
       </div>
       <div className="flex">
+        <DownloadCode />
         <ShareLink />
         <ThemeSwitch />
       </div>
