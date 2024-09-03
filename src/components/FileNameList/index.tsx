@@ -1,7 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { PlaygroundContext } from '../../PlaygroundContext';
 import { FileNameItem } from '../FileNameItem';
-import { ENTRY_FILE_NAME } from '../../files';
+import {
+  APP_COMPONENT_FILE_NAME,
+  ENTRY_FILE_NAME,
+  IMPORT_MAP_FILE_NAME,
+} from '../../files';
 
 export default function FileNameList() {
   const {
@@ -17,9 +21,17 @@ export default function FileNameList() {
 
   const [create, setCreate] = useState(false);
 
+  const readonlyFileNames = [
+    ENTRY_FILE_NAME,
+    IMPORT_MAP_FILE_NAME,
+    APP_COMPONENT_FILE_NAME,
+  ];
+
   const handleEditComplete = (name: string, prevName: string) => {
-    updateFileName(prevName, name);
-    setSelectedFileName(name);
+    if (name !== prevName) {
+      updateFileName(prevName, name);
+      setSelectedFileName(name);
+    }
     setCreate(false);
   };
 
@@ -53,6 +65,7 @@ export default function FileNameList() {
             e.stopPropagation();
             handleRemove(item);
           }}
+          readonly={readonlyFileNames.includes(item)}
         ></FileNameItem>
       ))}
       <div className="" onClick={addTab}>

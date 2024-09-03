@@ -7,6 +7,7 @@ export interface FileNameItemProps {
   onEditComplete: (filename: string) => void;
   create: boolean;
   onRemove: MouseEventHandler;
+  readonly: boolean;
 }
 
 export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
@@ -17,6 +18,7 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
     onEditComplete,
     create,
     onRemove,
+    readonly,
   } = props;
 
   const [editing, setEditing] = useState(false);
@@ -28,6 +30,9 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
   const [creating, setCreating] = useState(create);
 
   const handleDoubleClick = () => {
+    if (readonly) {
+      return;
+    }
     setEditing(true);
     // 异步保证能获取到inputRef
     setTimeout(() => {
@@ -65,12 +70,14 @@ export const FileNameItem: React.FC<FileNameItemProps> = (props) => {
       ) : (
         <>
           <span onDoubleClick={handleDoubleClick}>{name}</span>
-          <span className="flex ml-[0.3125rem]" onClick={onRemove}>
-            <svg width="12" height="12" viewBox="0 0 24 24">
-              <line stroke="#999" x1="18" y1="6" x2="6" y2="18"></line>
-              <line stroke="#999" x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </span>
+          {!readonly && (
+            <span className="flex ml-[0.3125rem]" onClick={onRemove}>
+              <svg width="12" height="12" viewBox="0 0 24 24">
+                <line stroke="#999" x1="18" y1="6" x2="6" y2="18"></line>
+                <line stroke="#999" x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </span>
+          )}
         </>
       )}
     </div>
