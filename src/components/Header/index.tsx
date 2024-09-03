@@ -1,4 +1,5 @@
 import logoSvg from '../../assets/react.svg';
+import { ShareLink } from '../ShareLink';
 import { ThemeSwitch } from '../ThemeSwitch';
 
 export default function Header() {
@@ -8,7 +9,10 @@ export default function Header() {
         <img alt="logo" src={logoSvg} className="h-6 mr-[0.625rem]" />
         <span>React Playground</span>
       </div>
-      <ThemeSwitch />
+      <div className="flex">
+        <ShareLink />
+        <ThemeSwitch />
+      </div>
     </div>
   );
 }
