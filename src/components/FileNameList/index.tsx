@@ -61,8 +61,7 @@ export default function FileNameList() {
           onClick={() => setSelectedFileName(item)}
           onEditComplete={(name: string) => handleEditComplete(name, item)}
           create={create && index === tabs.length - 1}
-          onRemove={(e) => {
-            e.stopPropagation();
+          onRemove={() => {
             handleRemove(item);
           }}
           readonly={readonlyFileNames.includes(item)}
